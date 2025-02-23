@@ -1,0 +1,66 @@
+buildscript {
+    ext.kotlin_version = '2.0.0'  // <--- ย้ายมาไว้ตรงนี้
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:...") // เวอร์ชั่น Gradle อาจแตกต่างกัน
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:\$kotlin_version")
+    }
+}
+
+// *** ห้ามใส่ ext.kotlin_version ตรงนี้อีก ***
+// buildTypes {
+//     ext.kotlin_version = '2.0.0'  // <--- ลบบรรทัดนี้ออกไปเลย! (ตำแหน่งผิด)
+//     release {
+//         // ...
+//     }
+// }
+
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services' version '4.4.2' apply false
+}
+
+android {
+    namespace = "com.example.week5"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.week5"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+    dependencies {
+        implementation(platform('com.google.firebase:firebase-bom:33.9.0'))
+        implementation('com.google.firebase:firebase-analytics')
+    }
+}
+
+flutter {
+    source = "../.."
+}

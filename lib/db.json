@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "iPhone 13",
+      "description": "Apple smartphone",
+      "price": 29999
+    },
+    {
+      "id": "d7db",
+      "name": "Iphone 16 Plus",
+      "description": "Apple moblie phone",
+      "price": 55900
+    }
+  ]
+}
